@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pfzy-{{ version }}.tar.gz
-  sha256: 717ea765dd10b63618e7298b2d98efd819e0b30cd5905c9707223dceeb94b3f1
+  url: https://github.com/kazhala/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 4a36126e045da6471c53e9ea36424296307a1841bd828a41574d7a4aa58dbcea
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
   number: 0
+  skip: True  # [py<37]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - python >=3.7,<4.0
+    - python
     - pip
-    - poetry
+    - poetry-core
   run:
-    - python >=3.7,<4.0
+    - python
 
 test:
   imports:
@@ -32,10 +32,17 @@ test:
 
 about:
   home: https://github.com/kazhala/pfzy
-  summary: Python port of the fzy fuzzy string matching algorithm
   license: MIT
   license_file: LICENSE
+  license_family: MIT
+  summary: Python port of the fzy fuzzy string matching algorithm.
+  description: |
+    Python port of the fzy fuzzy string matching algorithm.
+  doc_url: https://pfzy.readthedocs.io
+  dev_url: https://github.com/kazhala/pfzy
 
 extra:
   recipe-maintainers:
     - avsthiago
+  skip-lints:
+    - missing_wheel
