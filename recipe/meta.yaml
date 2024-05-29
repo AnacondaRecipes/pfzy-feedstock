@@ -25,10 +25,15 @@ requirements:
 test:
   imports:
     - pfzy
-  commands:
-    - pip check
   requires:
     - pip
+    - pytest
+    - pytest-asyncio
+  source_files:
+    - tests
+  commands:
+    - pip check
+    - pytest -v tests
 
 about:
   home: https://github.com/kazhala/pfzy
